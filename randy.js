@@ -78,8 +78,8 @@ function initialize (rng) {
     /* Returns an array of length count, containing unique elements chosen
      * from the array population.  Like a raffle draw.
      *
-     * Mathematically equivalent to shuffle(population).slice(0, count),
-     * but more efficient.  Throws an exception if count >
+     * Mathematically equivalent to shuffle(population).slice(0,
+     * count), but more efficient.  Catches fire if count >
      * population.length. */
     function sample (population, count) {
         var arr = population.slice();
