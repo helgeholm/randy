@@ -61,7 +61,7 @@ describe("randy", function () {
         var deck = orig.slice();
         rep(function () {
             randy.shuffleInplace(deck);
-            assert.deepEqual(deck.sort(), orig);
+            assert.deepEqual(orig, deck.sort());
         });
         done();
     });
@@ -70,7 +70,7 @@ describe("randy", function () {
         var deck = "green blue red purple apple".split(' ').sort();
         rep(function () {
             var shuffled = randy.shuffle(deck);
-            assert.deepEqual(shuffled.sort(), deck);
+            assert.deepEqual(deck, shuffled.sort());
         });
         done();
     });
