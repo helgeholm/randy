@@ -255,10 +255,13 @@ the V8 engine's decent PRNG is insufficient for many tasks as it has a
 period of 2^32, making it mathematically impossible to generate all
 permutations of a deck of cards larger than 12 cards.
 
-I'm hoping to implement the Mersenne twister as default PRNG
-for this module, as it has a period of 2^19937 − 1.
+I'm hoping to implement the Mersenne twister as default PRNG for this
+module, as it has a period of 2^19937 − 1.  Also, working directly
+with random bits makes the integer based random functions simpler.
 
 ## Notes
 
-Due to floating point rounding, returned values may sometimes tangent
-the upper bound.
+Due to floating point rounding, returned values may *extremely rarely*
+tangent the upper bound.  The integer based random functions are
+guarded against this, but there is no good way to do this for floating
+point values.
