@@ -1,0 +1,24 @@
+{
+    "name": "randy",
+    "version": "1.0.0alpha",
+    "description": "Utilies around Math.random() or supplied equivalent.",
+    "author": {
+        "name": "Helge Skogly Holm",
+        "email": "helge.holm@gmail.com"
+    },
+    "keywords": [ "random" ],
+    "bugs": {
+        "email": "helge.holm@gmail.com"
+    },
+    "main": "./index",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/deestan/randy.git"
+    },
+    "devDependencies": {
+        "mocha": "1.1.0"
+    },
+    "scripts": {
+        "test": "./runtests.sh"
+    }
+}
