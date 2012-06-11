@@ -19,6 +19,6 @@
         "mocha": "1.1.0"
     },
     "scripts": {
-        "test": "./runtests.sh"
+        "test": "node_modules/mocha/bin/mocha"
     }
 }
