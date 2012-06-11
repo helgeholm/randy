@@ -53,7 +53,7 @@ in the range 0.0 inclusive to 1.0 exclusive.
 <a name="randInt" />
 ### randInt ([min], max)
 
-Returns a random integer i such that min < i < max.
+Returns a random integer i such that min <= i < max.
 
 __Arguments__
 
