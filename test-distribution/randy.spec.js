@@ -11,8 +11,6 @@
 var randy = require("../lib/randy");
 var assert = require("assert");
 
-var cl = console.log;
-
 describe("randy distributions", function () {
     function mkHistogram (bucketsMins) {
         var buckets = [];
