@@ -14,7 +14,7 @@ be overridden.
     > randy.shuffle(["J spades", "K hearts", "10 hearts"]);
     [ "K hearts", "J spades", "10 hearts" ]
 
-    > randy.choice("heads", "tails")
+    > randy.choice(["heads", "tails"])
     "heads"
 
 ## Documentation
