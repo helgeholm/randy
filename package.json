@@ -19,6 +19,7 @@
         "mocha": "1.1.0"
     },
     "scripts": {
-        "test": "node_modules/mocha/bin/mocha"
+        "test": "node_modules/mocha/bin/mocha",
+        "test-distribution": "node_modules/mocha/bin/mocha -t 10000 -s 10000 test-distribution/"
     }
 }
