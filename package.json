@@ -1,6 +1,6 @@
 {
     "name": "randy",
-    "version": "1.0.0alpha",
+    "version": "1.0.0alpha2",
     "description": "Utilities around Math.random() or supplied equivalent.",
     "author": {
         "name": "Helge Skogly Holm",
