@@ -8,6 +8,7 @@
     },
     "keywords": [ "random" ],
     "bugs": {
+        "url": "http://github.com/deestan/randy/issues",
         "email": "helge.holm@gmail.com"
     },
     "main": "./index",
