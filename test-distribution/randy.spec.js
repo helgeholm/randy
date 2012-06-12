@@ -30,10 +30,13 @@ describe("randy distributions", function () {
         // are problems.
         function log () {
             var max = 0;
+            var sum = 0;
             var labelWidth = buckets[buckets.length - 1].x.toString().length;
-            for (var i = 0; i < buckets.length; i++)
+            for (var i = 0; i < buckets.length; i++) {
                 if (buckets[i].n > max)
                     max = buckets[i].n;
+                sum += buckets[i].n;
+            }
             var barWidth = 75 - labelWidth;
             console.log();
             for (var i = 0; i < buckets.length; i++) {
@@ -45,6 +48,12 @@ describe("randy distributions", function () {
                 for (var j = 0; j < w; j++)
                     bar += "#";
                 console.log(label + ": " + bar);
+            }
+            for (var i = 0; i < buckets.length; i++) {
+                var label = buckets[i].x.toString();
+                while (label.length < labelWidth)
+                    label = " " + label;
+                console.log(label + ": " + buckets[i].n / sum);
             }
         }
 
@@ -110,6 +119,61 @@ describe("randy distributions", function () {
         });
         var dist = function (x) { return 0.2; };
         h.check(dist);
+        done();
+    });
+
+    it("choice has even distribution", function (done) {
+        var h = mkHistogram([1, 2, 3, 4]);
+        rep(function () {
+            h.insert(randy.choice([1, 2, 3, 4]));
+        });
+        var dist = function (x) { return 0.25; };
+        h.check(dist);
+        done();
+    });
+
+    it("triangular has triangular distribution", function (done) {
+        var h = mkHistogram([0, 1, 2, 3, 4]);
+        rep(function () {
+            h.insert(randy.triangular(0, 5, 2.5));
+        });
+        var dist = function (x) {
+            if (x == 0) return 0.08;
+            if (x == 1) return 0.24;
+            if (x == 2) return 0.36;
+            if (x == 3) return 0.24;
+            if (x == 4) return 0.08;
+        };
+        h.check(dist);
+        done();
+    });
+    
+    it("shuffle puts anything anywhere", function (done) {
+        var list = [1, 2, 3, 4, 5];
+        // For each item in the original list, check that it has equal
+        // chance to end up in each index position after a shuffle.
+        for (var testIdx = 0; testIdx < list.length; testIdx++) {
+            var h = mkHistogram([0, 1, 2, 3, 4]);
+            rep(function () {
+                var shuffled = randy.shuffle(list);
+                for (var i = 0; i < shuffled.length; i++)
+                    if (shuffled[i] == list[testIdx])
+                        h.insert(i);
+            });
+            h.check(function (x) { return 0.2; } );
+        }
+        done();
+    });
+
+    it("sample has an even distribution", function (done) {
+        var list = [1, 2, 3, 4, 5];
+        var h = mkHistogram(list);
+        rep(function () {
+            var samples = randy.sample(list, 3);
+            for (var i = 0; i < samples.length; i++)
+                h.insert(samples[i]);
+        });
+        h.check(function (x) { return 0.2; } );
         done();
     });
 });
