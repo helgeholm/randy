@@ -22,10 +22,11 @@ function test(useMin, done) {
 
 console.log("Testing using normal version.");
 test("no", function (err) {
-    if (err === null)
+    if (err === null) {
         console.log("Testing using minified version.");
         test("yes", function (err) {
             if (err === null)
                 console.log("☺");
         });
+    }
 });
