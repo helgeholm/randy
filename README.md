@@ -8,14 +8,20 @@ be overridden.
 
 ## Quick Examples
 
-    > randy.randInt(100)
-    42
+```javascript
+var a = randy.randInt(100);
+// a == 42
+```
 
-    > randy.shuffle(["J spades", "K hearts", "10 hearts"]);
-    [ "K hearts", "J spades", "10 hearts" ]
+```javascript
+var d = randy.shuffle(["J spades", "K hearts", "10 hearts"]);
+// d == [ "K hearts", "J spades", "10 hearts" ]
+```
 
-    > randy.choice(["heads", "tails"])
-    "heads"
+```javascript
+var c = randy.choice(["heads", "tails"]);
+// c == "heads"
+```
 
 ## Documentation
 
@@ -39,14 +45,18 @@ on that PRNG instead.
 The given PRNG must take no parameters and return a floating point number
 in the range 0.0 inclusive to 1.0 exclusive.
 
-    > var dilbertRng = function () { return 0.9; };
-    > var randy = require("randy")(dilbertRng);
-    > randy.random();
-    0.9
-    > randy.random();
-    0.9
-    > randy.random();
-    0.9
+__Example__
+
+```javascript
+var dilbertRng = function () { return 0.9; };
+var randy = require("randy")(dilbertRng);
+var x = randy.random();
+// x == 0.9
+var y = randy.random();
+// y == 0.9
+var z = randy.random();
+// z == 0.9
+```
 
 ## Module Functions
 
@@ -62,12 +72,14 @@ __Arguments__
 
 __Example__
 
-    console.log("Rolling the dice:");
-    var d1 = randy.randInt(1, 7);
-    var d2 = randy.randInt(1, 7);
-    console.log(d1 + " + " + d2 + " = " + (d1 + d2));
-    if (d1 + d2 == 2)
-        console.log("Snake eyes!");
+```javascript
+console.log("Rolling the dice:");
+var d1 = randy.randInt(1, 7);
+var d2 = randy.randInt(1, 7);
+console.log(d1 + " + " + d2 + " = " + (d1 + d2));
+if (d1 + d2 == 2)
+    console.log("Snake eyes!");
+```
 
 ---------------------------------------
 
@@ -85,13 +97,15 @@ __Arguments__
 
 __Example__
 
-    var breakfast = random.choice(["whisky", "bacon", "panic"]);
-    console.log("Good morning!  Enjoy some " + breakfast + "!");
+```javascript
+var breakfast = random.choice(["whisky", "bacon", "panic"]);
+console.log("Good morning!  Enjoy some " + breakfast + "!");
 
-    // Set direction vector for a ghost from Pac-Man.
-    ghost.currentDirection = random.choice([
-        {x:0, y:-1}, {x:1, y:0}, {x:0, y:1}, {x:-1, y:0}
-    ]);
+// Set direction vector for a ghost from Pac-Man.
+ghost.currentDirection = random.choice([
+    {x:0, y:-1}, {x:1, y:0}, {x:0, y:1}, {x:-1, y:0}
+]);
+```
     
 ---------------------------------------
 
@@ -109,8 +123,10 @@ __Arguments__
 
 __Example__
 
-    var runners = ["Andy", "Bob", "Clarence", "David"];
-    var startingOrder = randy.shuffle(runners);
+```javascript
+var runners = ["Andy", "Bob", "Clarence", "David"];
+var startingOrder = randy.shuffle(runners);
+```
 
 ---------------------------------------
 
@@ -127,24 +143,26 @@ __Arguments__
 
 __Example__
 
-    // Reorder elements at random until they happen to be sorted.
-    def bogosort (arr) {
-        while (true) {
-            randy.shuffleInplace(arr);
+```javascript
+// Reorder elements at random until they happen to be sorted.
+def bogosort (arr) {
+    while (true) {
+        randy.shuffleInplace(arr);
 
-            var sorted = true;
-            for (var i=0; i<arr.length-1; i++)
-                sorted = sorted && (arr[i] < arr[i+1]);
-            if (sorted)
-                return;
-        }
+        var sorted = true;
+        for (var i=0; i<arr.length-1; i++)
+            sorted = sorted && (arr[i] < arr[i+1]);
+        if (sorted)
+            return;
     }
+}
 
-    // Create new draw deck from card discard pile.
-    if (deck.length == 0) {
-        deck = discardPile.splice(0);
-        randy.shuffle(deck);
-    }
+// Create new draw deck from card discard pile.
+if (deck.length == 0) {
+    deck = discardPile.splice(0);
+    randy.shuffle(deck);
+}
+```
 
 ---------------------------------------
 
@@ -164,12 +182,14 @@ __Arguments__
 
 __Example__
 
-    // Raffle draw for 3 bottles of wine.  Cindy has bought 2 tickets.
-    var raffleTickets = ["Alice", "Beatrice", "Cindy", "Cindy", "Donna"];
+```javascript
+// Raffle draw for 3 bottles of wine.  Cindy has bought 2 tickets.
+var raffleTickets = ["Alice", "Beatrice", "Cindy", "Cindy", "Donna"];
 
-    var winners = randy.sample(raffleTickets, 3);
+var winners = randy.sample(raffleTickets, 3);
 
-    console.log("The winners are: " + winners.join(", "));
+console.log("The winners are: " + winners.join(", "));
+```
 
 ---------------------------------------
 
@@ -186,15 +206,17 @@ __Arguments__
 
 __Example__
 
-    // Torpedo guidance system.
-    var heading = randy.uniform(360.0);
+```javascript
+// Torpedo guidance system.
+var heading = randy.uniform(360.0);
 
-    // Random event repeating every 1-5 minutes.
-    function flashLightning () {
-        flash();
-        var delayNext = randy.uniform(60.0, 300.0);
-        setTimeout(flashLightning, delayNexy);
-    }
+// Random event repeating every 1-5 minutes.
+function flashLightning () {
+    flash();
+    var delayNext = randy.uniform(60.0, 300.0);
+    setTimeout(flashLightning, delayNext);
+}
+```
 
 ---------------------------------------
 
@@ -208,7 +230,9 @@ Math.random() function.  Supplied for convenience.
 
 __Example__
 
-    var opacity = randy.random();
+```javascript
+var opacity = randy.random();
+```
 
 ---------------------------------------
 
@@ -234,17 +258,19 @@ __Arguments__
 
 __Example__
 
-    // Generate customer test data.  Customers are aged 18 to 40, but
-    // most of them are in their twenties.  Their income is between
-    // 40000-150000 Hyrulean Rupees per year, but typically around
-    // 60000.
-    for (i=0; i<1000; i++) {
-        db.insertCustomer({
-            name: "Bruce",
-            birthYear: Math.floor( randy.triangular(1972, 1990, 1983) ),
-            income: randy.triangular(40000, 150000, 60000)
-        });
-    }
+```javascript
+// Generate customer test data.  Customers are aged 18 to 40, but
+// most of them are in their twenties.  Their income is between
+// 40000-150000 Hyrulean Rupees per year, but typically around
+// 60000.
+for (i=0; i<1000; i++) {
+    db.insertCustomer({
+        name: "Bruce",
+        birthYear: Math.floor( randy.triangular(1972, 1990, 1983) ),
+        income: randy.triangular(40000, 150000, 60000)
+    });
+}
+```
 
 ---------------------------------------
 
