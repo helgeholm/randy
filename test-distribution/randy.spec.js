@@ -8,7 +8,12 @@
  * perfectly.  Therefore they are in their own test system instead of
  * in the unit tests. */
 
-var randy = require("../lib/randy");
+var randy;
+if (process.env.TEST_MINIFIED_VERSION == 'yes') {
+    randy = require("../lib/randy.min");
+} else {
+    randy = require("../lib/randy");
+}
 var assert = require("assert");
 
 describe("randy distributions", function () {
