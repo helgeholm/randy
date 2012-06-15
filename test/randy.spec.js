@@ -1,10 +1,12 @@
-var randy;
-if (process.env.TEST_MINIFIED_VERSION == 'yes') {
-    randy = require("../lib/randy.min");
-} else {
-    randy = require("../lib/randy");
+if (typeof randy === "undefined") {
+    // Predefined in browser mode, so assume nodejs context.
+    if (process.env.TEST_MINIFIED_VERSION == 'yes') {
+        randy = require("../lib/randy.min");
+    } else {
+        randy = require("../lib/randy");
+    }
+    var assert = require("assert");
 }
-var assert = require("assert");
 
 describe("randy", function () {
     function rep (f) {

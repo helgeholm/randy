@@ -23,6 +23,7 @@
     "scripts": {
         "test": "./test-both.js",
         "minify": "node_modules/uglify-js/bin/uglifyjs --unsafe -o lib/randy.min.js lib/randy.js",
-        "test-distribution": "./test-both.js -R landing -t 10000 -s 10000 test-distribution/"
+        "test-distribution": "./test-both.js -R landing -t 10000 -s 10000 test-distribution/",
+        "preinstall": "git submodule update --init --recursive"
     }
 }
