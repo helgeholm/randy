@@ -3,8 +3,8 @@
 Randy is a utility module inspired by Python's standard module
 "random".
 
-By default it bases all its functions on Math.random(), but this can
-be overridden.
+All functions are based on a JavaScript implementation of
+[WELL-1024a](http://en.wikipedia.org/wiki/Well_equidistributed_long-period_linear).
 
 ## Quick Examples
 
@@ -274,20 +274,14 @@ for (i=0; i<1000; i++) {
 
 ---------------------------------------
 
-## Future
-
-Math.random() is implementation-dependent and frequently crappy.  Even
-the V8 engine's decent PRNG is insufficient for many tasks as it has a
-period of 2^32, making it mathematically impossible to generate all
-permutations of a deck of cards larger than 12 cards.
-
-I'm hoping to implement the Mersenne twister as default PRNG for this
-module, as it has a period of 2^19937 − 1.  Also, working directly
-with random bits makes the integer based random functions simpler.
-
 ## Notes
 
-Due to floating point rounding, returned values may *extremely rarely*
-tangent the upper bound.  The integer based random functions are
-guarded against this, but there is no good way to do this for floating
-point values.
+Due to floating point rounding, functions returning floating point
+values may *extremely rarely* tangent the upper bound.
+
+Random integers are calculated as a modulo of a random UINT32.  This
+means lower numbers will be slightly more favoured than large numbers,
+and imbalances will begin to be noticeable if you're asking for large
+integers.  If this is a problem, you are advised to do your own
+calculations on randy.randInt(), which returns a well-distributed
+UINT32.
