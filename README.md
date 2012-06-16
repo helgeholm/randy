@@ -285,3 +285,6 @@ and imbalances will begin to be noticeable if you're asking for large
 integers.  If this is a problem, you are advised to do your own
 calculations on randy.randInt(), which returns a well-distributed
 UINT32.
+
+Maximum integer range is 4294967296.  Any calls requiring a larger
+range than this, explicitly or implicitly, will not work at all.
