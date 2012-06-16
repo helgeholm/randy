@@ -1,5 +1,3 @@
-"use strict";
-
 /* These tests check that the RNG distribution falls within the
  * expected range.
  *
