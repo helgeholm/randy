@@ -154,19 +154,4 @@ describe("randy", function () {
         });
         done();
     });
-
-    it("can be initialized with another PRNG", function (done) {
-        var troll = function () { return 0.9; };
-        var dandy = randy(troll);
-        rep(function () {
-            assert.equal(0.9, dandy.random());
-        });
-        done();
-    });
-
-    it("can be initialized to default PRNG", function (done) {
-        var dandy = randy();
-        assert.doesNotThrow(dandy.random);
-        done();
-    });
 });
