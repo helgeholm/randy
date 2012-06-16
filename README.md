@@ -36,28 +36,6 @@ var c = randy.choice(["heads", "tails"]);
 * [random](#random)
 * [triangular](#triangular)
 
-### Module Initialization (optional)
-
-Another PRNG than Math.random() can be supplied during initialization,
-resulting in a version of the module where all the functions are based
-on that PRNG instead.
-
-The given PRNG must take no parameters and return a floating point number
-in the range 0.0 inclusive to 1.0 exclusive.
-
-__Example__
-
-```javascript
-var dilbertRng = function () { return 0.9; };
-var randy = require("randy")(dilbertRng);
-var x = randy.random();
-// x == 0.9
-var y = randy.random();
-// y == 0.9
-var z = randy.random();
-// z == 0.9
-```
-
 ## Module Functions
 
 <a name="randInt" />
