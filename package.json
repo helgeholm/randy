@@ -23,7 +23,7 @@
     "scripts": {
         "test": "node_modules/mocha/bin/mocha",
         "minify": "node_modules/uglify-js/bin/uglifyjs --unsafe -o lib/randy.min.js lib/randy.js",
-        "test-distribution": "node_modules/mocha/bin/mocha -R landing -t 10000 -s 10000 test-distribution/",
+        "test-distribution": "node_modules/mocha/bin/mocha -R landing -t 300000 -s 300000 test-distribution/",
         "qc": "node ./qc.js",
         "preinstall": "git submodule update --init --recursive"
     }

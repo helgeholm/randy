@@ -6,6 +6,8 @@ Randy is a utility module inspired by Python's standard module
 All functions are based on a JavaScript implementation of
 [WELL-1024a](http://en.wikipedia.org/wiki/Well_equidistributed_long-period_linear).
 
+All random numbers are based on 53-bit precision.
+
 ## Quick Examples
 
 ```javascript
@@ -257,12 +259,14 @@ for (i=0; i<1000; i++) {
 Due to floating point rounding, functions returning floating point
 values may *extremely rarely* tangent the upper bound.
 
-Random integers are calculated as a modulo of a random UINT32.  This
-means lower numbers will be slightly more favoured than large numbers,
-and imbalances will begin to be noticeable if you're asking for large
-integers.  If this is a problem, you are advised to do your own
-calculations on randy.randInt(), which returns a well-distributed
-UINT32.
+Random integers are calculated as a modulo of a random 53-bit unsigned
+integer.  This means lower numbers will be slightly more favoured than
+large numbers, and imbalances will begin to be noticeable if you're
+asking for large integers.  If this is a problem, you are advised to
+do your own calculations on randy.randInt(), which returns a
+well-distributed UINT53.
 
-Maximum integer range is 4294967296.  Any calls requiring a larger
-range than this, explicitly or implicitly, will not work at all.
+Maximum integer range is 2^53 = 9007199254740992.  This is the maximum
+integer available in Javascript without losing precision.  Any calls
+requiring a larger range than this, explicitly or implicitly, will not
+work at all.

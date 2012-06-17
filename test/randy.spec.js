@@ -20,11 +20,19 @@ describe("randy", function () {
     });
 
     it("random() function to [0, 1)", function (done) {
-        // Note - floating point rounding means we must accept
-        // 1.0 as a valid value.
+        // Note - floating point rounding means we must accept 1.0 as
+        // a valid value.
         rep(function () {
             assert.ok(randy.random() <= 1.0);
             assert.ok(randy.random() >= 0.0);
+        });
+        done();
+    });
+
+    it("randInt() default to full range", function (done) {
+        rep(function () {
+            assert.ok(randy.randInt() > 0);
+            assert.ok(randy.randInt() < 0x20000000000000);
         });
         done();
     });
