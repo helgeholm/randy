@@ -107,7 +107,7 @@ describe("randy distributions", function () {
         done();
     });
 
-    it("randInt has even distribution for large values", function (done) {
+    it("randInt has even distribution for 32-bit values", function (done) {
         // Will fail massively if using 32-bit precision.
         this.timeout(10000);
         var h = mkHistogram([
@@ -119,6 +119,23 @@ describe("randy distributions", function () {
         ]);
         rep(function () {
             h.insert(randy.randInt(0, 0xa0000000));
+        });
+        var dist = function (x) { return 0.2; };
+        h.check(dist);
+        done();
+    });
+
+    it("randInt has even distribution for 34-bit values", function (done) {
+        this.timeout(10000);
+        var h = mkHistogram([
+            0x0000000000,
+            0x2000000000,
+            0x4000000000,
+            0x6000000000,
+            0x8000000000
+        ]);
+        rep(function () {
+            h.insert(randy.randInt(0, 0xa000000000));
         });
         var dist = function (x) { return 0.2; };
         h.check(dist);
