@@ -87,7 +87,7 @@ describe("randy distributions", function () {
     }
 
     function rep (f) {
-        for (var i = 0; i < 1000000; i++)
+        for (var i = 0; i < 1000 * 1000 * 10; i++)
             f();
     };
 
@@ -103,6 +103,24 @@ describe("randy distributions", function () {
             h.insert(randy.randInt(0, 10));
         });
         var dist = function (x) { return 0.1; };
+        h.check(dist);
+        done();
+    });
+
+    it("randInt has even distribution for large values", function (done) {
+        // Will fail massively if using 32-bit precision.
+        this.timeout(10000);
+        var h = mkHistogram([
+            0x00000000,
+            0x20000000,
+            0x40000000,
+            0x60000000,
+            0x80000000
+        ]);
+        rep(function () {
+            h.insert(randy.randInt(0, 0xa0000000));
+        });
+        var dist = function (x) { return 0.2; };
         h.check(dist);
         done();
     });
