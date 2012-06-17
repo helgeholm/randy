@@ -71,7 +71,7 @@ __Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/r
 ## Module Functions
 
 <a name="randInt" />
-### randInt ([min], max)
+### randInt ([min,] max)
 
 Returns a random integer i such that min <= i < max.
 
@@ -204,7 +204,7 @@ console.log("The winners are: " + winners.join(", "));
 ---------------------------------------
 
 <a name="uniform" />
-### uniform ([min], max)
+### uniform ([min,] max)
 
 Returns a floating point number n, such that min <= n < max.
 
@@ -247,7 +247,7 @@ var opacity = randy.random();
 ---------------------------------------
 
 <a name="triangular" />
-### triangular ([min], [max], [mode])
+### triangular ([min,] [max,] [mode])
 
 The triangular distribution is typically used as a subjective
 description of a population for which there is only limited sample
