@@ -1,12 +1,16 @@
 # Randy.js
 
-Randy is a utility module inspired by Python's standard module
-"random".
+Randy is a utility module inspired by Python's very handy standard
+module "random".  It contains a PRNG and useful randomness functions.
 
 All functions are based on a JavaScript implementation of
-[WELL-1024a](http://en.wikipedia.org/wiki/Well_equidistributed_long-period_linear).
-
-All random numbers are based on 53-bit precision.
+[WELL-1024a](http://en.wikipedia.org/wiki/Well_equidistributed_long-period_linear),
+with 53-bit precision.  The reason for this is that the built-in
+`Math.random()` function is
+[implementation-dependent](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
+and therefore of very limited usefulness, as implementations tend to
+be crappy.  Even the V8 engine (used by Node.js) only provide 32-bit
+entropy, and is based on the platform-dependent C++ `rand()` function.
 
 ## Quick Examples
 
@@ -24,6 +28,32 @@ var d = randy.shuffle(["J spades", "K hearts", "10 hearts"]);
 var c = randy.choice(["heads", "tails"]);
 // c == "heads"
 ```
+
+<a name="download" />
+## Download
+
+For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
+
+    npm install randy
+
+<a name="browser" />
+### In the Browser
+
+```html
+<script src="randy.min.js"></script>
+<script>
+    var h = document.getElementById("computerHandImg");
+    h.src = randy.choice([
+        "/img/rock",
+        "/img/paper",
+        "/img/kitten"
+    ]);
+</script>
+```
+
+__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 7.5kb Uncompressed
+
+__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.1kb Minified
 
 ## Documentation
 
@@ -267,6 +297,6 @@ do your own calculations on randy.randInt(), which returns a
 well-distributed UINT53.
 
 Maximum integer range is 2^53 = 9007199254740992.  This is the maximum
-integer available in Javascript without losing precision.  Any calls
+integer available in JavaScript without losing precision.  Any calls
 requiring a larger range than this, explicitly or implicitly, will not
 work at all.
