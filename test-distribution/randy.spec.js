@@ -97,6 +97,7 @@ describe("randy distributions", function () {
     });
 
     it("randInt has even distribution", function (done) {
+        this.timeout(10000);
         var h = mkHistogram([0,1,2,3,4,5,6,7,8,9]);
         rep(function () {
             h.insert(randy.randInt(0, 10));
@@ -107,6 +108,7 @@ describe("randy distributions", function () {
     });
 
     it("random has even distribution", function (done) {
+        this.timeout(10000);
         var h = mkHistogram([0.0, 0.1, 0.2, 0.3, 0.4,
                              0.5, 0.6, 0.7, 0.8, 0.9]);
         rep(function () {
@@ -118,6 +120,7 @@ describe("randy distributions", function () {
     });
 
     it("uniform has even distribution", function (done) {
+        this.timeout(10000);
         var h = mkHistogram([4.5, 4.6, 4.7, 4.8, 4.9]);
         rep(function () {
             h.insert(randy.uniform(4.5, 5.0));
@@ -128,6 +131,7 @@ describe("randy distributions", function () {
     });
 
     it("choice has even distribution", function (done) {
+        this.timeout(10000);
         var h = mkHistogram([1, 2, 3, 4]);
         rep(function () {
             h.insert(randy.choice([1, 2, 3, 4]));
@@ -138,6 +142,7 @@ describe("randy distributions", function () {
     });
 
     it("triangular has triangular distribution", function (done) {
+        this.timeout(10000);
         var h = mkHistogram([0, 1, 2, 3, 4]);
         rep(function () {
             h.insert(randy.triangular(0, 5, 2.5));
@@ -154,6 +159,7 @@ describe("randy distributions", function () {
     });
     
     it("shuffle puts anything anywhere", function (done) {
+        this.timeout(10000);
         var list = [1, 2, 3, 4, 5];
         // For each item in the original list, check that it has equal
         // chance to end up in each index position after a shuffle.
@@ -171,6 +177,7 @@ describe("randy distributions", function () {
     });
 
     it("sample has an even distribution", function (done) {
+        this.timeout(10000);
         var list = [1, 2, 3, 4, 5];
         var h = mkHistogram(list);
         rep(function () {
