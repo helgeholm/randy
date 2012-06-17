@@ -8,9 +8,10 @@ All functions are based on a JavaScript implementation of
 with 53-bit precision.  The reason for this is that the built-in
 `Math.random()` function is
 [implementation-dependent](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
-and therefore of very limited usefulness, as implementations tend to
-be crappy.  Even the V8 engine (used by Node.js) only provide 32-bit
-entropy, and is based on the platform-dependent C++ `rand()` function.
+and therefore of very limited usefulness, as you risk running into
+crappy implementations.  Even the V8 engine (used by Node.js) only
+provide 32-bit entropy, and is based on the platform-dependent C++
+`rand()` function.
 
 ## Quick Examples
 
