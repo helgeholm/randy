@@ -319,7 +319,7 @@ for (i=0; i<1000; i++) {
 <a name="getRandBits" />
 ### getRandBits (n)
 
-Returns a random integer with precision 2^n, where n <= 53.
+Returns a random integer of bit width n, where n <= 53.
 
 __Arguments__
 
@@ -330,7 +330,7 @@ __Example__
 Create a perfect distribution function, which rejects overflow values
 instead of squeezing them into the desired range by use of modulo.
 Use a slow asynchronous approach, since reject-and-retry takes an
-indefinite amount to time.
+indefinite amount of time.
 
 ```javascript
 function perfectInt (max, callback) {
