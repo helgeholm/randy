@@ -72,14 +72,19 @@ __Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/r
 ## Module Functions
 
 <a name="randInt" />
-### randInt ([min,] max)
+### randInt (min, max, step)
+### randInt (max)
+### randInt ()
 
-Returns a random integer i such that min <= i < max.
+Returns a random integer i such that `min <= i < max`, and `(i - min)
+% step = 0`.
 
 __Arguments__
 
 * min - default=0. Returned integer will be min or greater.
-* max - Returned integer will be less than max.
+* max - default=2^53. Returned integer will be less than max.
+* step - default=1. Returned integer will be a multiple of this, counting from
+         min.
 
 __Example__
 
