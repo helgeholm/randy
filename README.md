@@ -369,4 +369,4 @@ a well-distributed UINT32.
 Maximum integer range is 2^53 = 9007199254740992.  This is the maximum
 integer available in JavaScript without losing precision.  Any calls
 requiring a larger range than this, explicitly or implicitly, will not
-work at all.
+yield correct results.
