@@ -5,7 +5,7 @@ module "random".  It contains a PRNG and useful randomness functions.
 
 All functions are based on a JavaScript implementation of
 [WELL-1024a](http://en.wikipedia.org/wiki/Well_equidistributed_long-period_linear),
-with 53-bit precision.  The reason for this is that the built-in
+with up to 53-bit precision.  The reason for this is that the built-in
 `Math.random()` function is
 [implementation-dependent](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 and therefore of very limited usefulness, as you risk running into
@@ -52,9 +52,9 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
 </script>
 ```
 
-__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 7.5kb Uncompressed
+__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 9.2kb Uncompressed
 
-__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.1kb Minified
+__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.5kb Minified
 
 ## Documentation
 
@@ -68,6 +68,27 @@ __Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/r
 * [uniform](#uniform)
 * [random](#random)
 * [triangular](#triangular)
+* [getRandBits](#getRandBits)
+
+### High-Precision Functions
+
+All the above module functions use 32-bit precision if possible, but
+will use 53-bit precision if they need to go outside the 32-bit range.
+
+The above functions are also available in always-53-bit-precision
+versions, under the `randy.good` namespace.  If you're working with
+values over 65536 or so, imbalances of 0.01% will start to creep in,
+and a higher precision will reduce this problem.
+
+These functions are about twice as slow as the regular ones.
+
+__Example__
+
+```javascript
+var salary = randy.good.triangular(1000000, 5000000, 2000000);
+```
+
+---------------------------------------
 
 ## Module Functions
 
@@ -79,10 +100,14 @@ __Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/r
 Returns a random integer i such that `min <= i < max`, and `(i - min)
 % step = 0`.
 
+Return value is based on a random 32-bit integer.
+
+If `max >= 2^32`, will call randy.good.getInt(), which goes up to 2^53.
+
 __Arguments__
 
 * min - default=0. Returned integer will be min or greater.
-* max - default=2^53. Returned integer will be less than max.
+* max - default=2^32. Returned integer will be less than max.
 * step - default=1. Returned integer will be a multiple of this, counting from
          min.
 
@@ -290,17 +315,55 @@ for (i=0; i<1000; i++) {
 
 ---------------------------------------
 
+<a name="getRandBits" />
+### getRandBits (n)
+
+Returns a random integer with precision 2^n, where n <= 53.
+
+__Arguments__
+
+* n - Number of random bits in return value.
+
+__Example__
+
+Create a perfect distribution function, which rejects overflow values
+instead of squeezing them into the desired range by use of modulo.
+Use a slow asynchronous approach, since reject-and-retry takes an
+indefinite amount to time.
+
+```javascript
+function perfectInt (max, callback) {
+    if (max === 0)
+        return callback(0);
+    var log2 = 0;
+    var mult = 1;
+    while (mult < max) {
+        log2 += 1;
+        mult *= 2;
+    }
+    function retry () {
+        var r = getRandBits(log2);
+        if (r < max)
+            return callback(r);
+        setTimeout(retry, 0);
+    }
+    retry();
+}
+```
+
+---------------------------------------
+
 ## Notes
 
 Due to floating point rounding, functions returning floating point
 values may *extremely rarely* tangent the upper bound.
 
-Random integers are calculated as a modulo of a random 53-bit unsigned
+Random integers are calculated as a modulo of a large random unsigned
 integer.  This means lower numbers will be slightly more favoured than
 large numbers, and imbalances will begin to be noticeable if you're
 asking for large integers.  If this is a problem, you are advised to
-do your own calculations on randy.randInt(), which returns a
-well-distributed UINT53.
+do your own calculations on [randy.randInt()](#randInt), which returns
+a well-distributed UINT32.
 
 Maximum integer range is 2^53 = 9007199254740992.  This is the maximum
 integer available in JavaScript without losing precision.  Any calls

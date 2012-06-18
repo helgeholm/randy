@@ -29,10 +29,10 @@ describe("randy", function () {
         done();
     });
 
-    it("randInt() default to full range", function (done) {
+    it("randInt() default to full 32-bit range", function (done) {
         rep(function () {
             assert.ok(randy.randInt() > 0);
-            assert.ok(randy.randInt() < 0x20000000000000);
+            assert.ok(randy.randInt() < 0x100000000);
         });
         done();
     });
@@ -41,6 +41,16 @@ describe("randy", function () {
         rep(function () {
             assert.ok(randy.randInt(10) < 10);
             assert.ok(randy.randInt(10) >= 0);
+        });
+        done();
+    });
+
+    it("randInt(2^32, 2^35) uses 53-bit range if needed", function (done) {
+        rep(function () {
+            var b32 = 4294967296;
+            var b35 = 34359738368;
+            assert.ok(randy.randInt(b32, b35) >= b32);
+            assert.ok(randy.randInt(b32, b35) < b35);
         });
         done();
     });
@@ -159,6 +169,14 @@ describe("randy", function () {
         rep(function () {
             assert.ok(randy.triangular(4, 8, 5) >= 4.0);
             assert.ok(randy.triangular(4, 8, 5) <= 8.0);
+        });
+        done();
+    });
+
+    it("getRandBits(9) stays within 0 <= x < 2^9", function (done) {
+        rep(function () {
+            assert.ok(randy.getRandBits(9) >= 0);
+            assert.ok(randy.getRandBits(9) < 512);
         });
         done();
     });
