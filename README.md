@@ -94,6 +94,7 @@ var salary = randy.good.triangular(1000000, 5000000, 2000000);
 
 <a name="randInt" />
 ### randInt (min, max, step)
+### randInt (min, max)
 ### randInt (max)
 ### randInt ()
 
