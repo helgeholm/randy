@@ -1,6 +1,6 @@
 {
     "name": "randy",
-    "version": "1.2.0alpha",
+    "version": "1.2.0beta",
     "description": "Random utilities based on WELL-1024a PRNG.",
     "author": {
         "name": "Helge Skogly Holm",
