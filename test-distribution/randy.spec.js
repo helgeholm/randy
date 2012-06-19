@@ -194,20 +194,20 @@ describe("randy distributions", function () {
     });
     
     it("shuffle puts anything anywhere", function (done) {
-        this.timeout(10000);
-        var list = [1, 2, 3, 4, 5];
         // For each item in the original list, check that it has equal
         // chance to end up in each index position after a shuffle.
-        for (var testIdx = 0; testIdx < list.length; testIdx++) {
-            var h = mkHistogram([0, 1, 2, 3, 4]);
-            rep(function () {
-                var shuffled = randy.shuffle(list);
-                for (var i = 0; i < shuffled.length; i++)
-                    if (shuffled[i] == list[testIdx])
-                        h.insert(i);
-            });
-            h.check(function (x) { return 0.2; } );
-        }
+        this.timeout(10000);
+        var list = [1, 2, 3, 4, 5];
+        var hs = {};
+        for (var i = 0; i < list.length; i++)
+            hs[list[i]] = mkHistogram([0, 1, 2, 3, 4]);
+        rep(function () {
+            var shuffled = randy.shuffle(list);
+            for (var i = 0; i < shuffled.length; i++)
+                hs[shuffled[i]].insert(i);
+        });
+        for (var i = 1; i < 6; i++)
+            hs[i].check(function (x) { return 0.2; } );
         done();
     });
 
