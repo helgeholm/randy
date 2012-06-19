@@ -52,7 +52,7 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
 </script>
 ```
 
-__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 9.2kb Uncompressed
+__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 9.4kb Uncompressed
 
 __Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.5kb Minified
 
@@ -66,7 +66,6 @@ __Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/r
 * [shuffleInplace](#shuffleInplace)
 * [sample](#sample)
 * [uniform](#uniform)
-* [random](#random)
 * [triangular](#triangular)
 * [getRandBits](#getRandBits)
 
@@ -103,7 +102,8 @@ Returns a random integer i such that `min <= i < max`, and `(i - min)
 
 Return value is based on a random 32-bit integer.
 
-If `max >= 2^32`, will call randy.good.getInt(), which goes up to 2^53.
+If `max >= 2^32`, will call `randy.good.getInt()`, which goes up to
+2^53.
 
 __Arguments__
 
@@ -140,11 +140,11 @@ __Arguments__
 __Example__
 
 ```javascript
-var breakfast = random.choice(["whisky", "bacon", "panic"]);
+var breakfast = randy.choice(["whisky", "bacon", "panic"]);
 console.log("Good morning!  Enjoy some " + breakfast + "!");
 
 // Set direction vector for a ghost from Pac-Man.
-ghost.currentDirection = random.choice([
+ghost.currentDirection = randy.choice([
     {x:0, y:-1}, {x:1, y:0}, {x:0, y:1}, {x:-1, y:0}
 ]);
 ```
@@ -214,8 +214,8 @@ if (deck.length == 0) {
 Returns an array of length count, containing unique elements chosen
 from the array population.  Like a raffle draw.
 
-Mathematically equivalent to shuffle(population).slice(0, count), but
-more efficient.  Catches fire if count > population.length.
+Mathematically equivalent to `shuffle(population).slice(0, count)`, but
+more efficient.  Catches fire if `count > population.length`.
 
 __Arguments__
 
@@ -236,15 +236,17 @@ console.log("The winners are: " + winners.join(", "));
 ---------------------------------------
 
 <a name="uniform" />
-### uniform ([min,] max)
+### uniform (min, max)
+### uniform (max)
+### uniform ()
 
-Returns a floating point number n, such that min <= n < max.
+Returns a floating point number n, such that `min <= n < max`.
 
 __Arguments__
 
 * min - Default=0.0.  Returned value will be equal to or larger than
         this.
-* max - Returned value will be less than this.
+* max - Default=1.0.  Returned value will be less than this.
 
 __Example__
 
@@ -262,24 +264,11 @@ function flashLightning () {
 
 ---------------------------------------
 
-<a name="random" />
-### random ()
-
-Returns a floating point number n such that 0.0 <= n < 1.0.
-
-Goes directly to the underlying PRNG.  By default this is the
-Math.random() function.  Supplied for convenience.
-
-__Example__
-
-```javascript
-var opacity = randy.random();
-```
-
----------------------------------------
-
 <a name="triangular" />
-### triangular ([min,] [max,] [mode])
+### triangular (min, max, mode)
+### triangular (min, max)
+### triangular (max)
+### triangular ()
 
 The triangular distribution is typically used as a subjective
 description of a population for which there is only limited sample
@@ -329,26 +318,22 @@ __Example__
 
 Create a perfect distribution function, which rejects overflow values
 instead of squeezing them into the desired range by use of modulo.
-Use a slow asynchronous approach, since reject-and-retry takes an
-indefinite amount of time.
 
 ```javascript
-function perfectInt (max, callback) {
-    if (max === 0)
-        return callback(0);
+function perfectInt (max) {
+    if (max == 0)
+        return 0;
     var log2 = 0;
     var mult = 1;
     while (mult < max) {
         log2 += 1;
         mult *= 2;
     }
-    function retry () {
+    while (false == false) {
         var r = getRandBits(log2);
         if (r < max)
-            return callback(r);
-        setTimeout(retry, 0);
+            return r;
     }
-    retry();
 }
 ```
 
