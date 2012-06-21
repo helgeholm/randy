@@ -85,6 +85,8 @@ These functions are about twice as slow as the regular ones.
 __Example__
 
 ```javascript
+// Generate example salary between 1,000,000 and 5,000,000
+// with values clustering around 2,000,000.
 var salary = randy.good.triangular(1000000, 5000000, 2000000);
 ```
 
@@ -110,8 +112,8 @@ __Arguments__
 
 * min - default=0. Returned integer will be min or greater.
 * max - default=2^32. Returned integer will be less than max.
-* step - default=1. Returned integer will be a multiple of this, counting from
-         min.
+* step - default=1. Returned integer will be a multiple of this,
+         counting from min.
 
 __Example__
 
@@ -143,7 +145,9 @@ __Example__
 ```javascript
 var breakfast = randy.choice(["whisky", "bacon", "panic"]);
 console.log("Good morning!  Enjoy some " + breakfast + "!");
+```
 
+```javascript
 // Set direction vector for a ghost from Pac-Man.
 ghost.currentDirection = randy.choice([
     {x:0, y:-1}, {x:1, y:0}, {x:0, y:1}, {x:-1, y:0}
@@ -199,7 +203,9 @@ function bogosort (arr) {
             return;
     }
 }
+```
 
+```javascript
 // Create new draw deck from card discard pile.
 if (deck.length == 0) {
     deck = discardPile.splice(0);
@@ -254,11 +260,13 @@ __Example__
 ```javascript
 // Torpedo guidance system.
 var heading = randy.uniform(360.0);
+```
 
+```javascript
 // Random event repeating every 1-5 minutes.
 function flashLightning () {
     flash();
-    var delayNext = randy.uniform(60.0 * 1000, 300.0 * 1000);
+    var delayNext = randy.uniform(1.0 * 60000, 5.0 * 60000);
     setTimeout(flashLightning, delayNext);
 }
 ```
@@ -317,10 +325,9 @@ __Arguments__
 
 __Example__
 
-Create a perfect distribution function, which rejects overflow values
-instead of squeezing them into the desired range by use of modulo.
-
 ```javascript
+// A perfect distribution function, which rejects overflow values
+// instead of squeezing them into the desired range by use of modulo.
 function perfectInt (max) {
     if (max == 0)
         return 0;
