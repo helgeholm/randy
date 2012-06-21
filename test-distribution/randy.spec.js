@@ -142,6 +142,17 @@ describe("randy distributions", function () {
         done();
     });
 
+    it("random has even distribution", function (done) {
+        this.timeout(10000);
+        var h = mkHistogram([0.0, 0.2, 0.4, 0.6, 0.8]);
+        rep(function () {
+            h.insert(randy.random());
+        });
+        var dist = function (x) { return 0.2; };
+        h.check(dist);
+        done();
+    });
+
     it("uniform has even distribution", function (done) {
         this.timeout(10000);
         var h = mkHistogram([4.5, 4.6, 4.7, 4.8, 4.9]);

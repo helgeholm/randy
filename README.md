@@ -71,6 +71,7 @@ __Example__
 * [shuffle](#shuffle)
 * [shuffleInplace](#shuffleInplace)
 * [sample](#sample)
+* [random](#random)
 * [uniform](#uniform)
 * [triangular](#triangular)
 * [getRandBits](#getRandBits)
@@ -81,9 +82,9 @@ All the above module functions use 32-bit precision if possible, but
 will use 53-bit precision if they need to go outside the 32-bit range.
 
 The above functions are also available in always-53-bit-precision
-versions, under the `randy.good` namespace.  If you're working with
-values over 65536 or so, imbalances of 0.01% will start to creep in,
-and a higher precision will reduce this problem.
+versions, under the `good` namespace.  If you're working with values
+over 65536 or so, imbalances of 0.01% will start to creep in, and a
+higher precision will reduce this problem.
 
 These functions are about twice as slow as the regular ones.
 
@@ -110,7 +111,7 @@ Returns a random integer i such that `min <= i < max`, and `(i - min)
 
 Return value is based on a random 32-bit integer.
 
-If `max >= 2^32`, will call `randy.good.getInt()`, which goes up to
+If `max >= 2^32`, will call `good.getInt()`, which goes up to
 2^53.
 
 __Arguments__
@@ -247,6 +248,15 @@ console.log("The winners are: " + winners.join(", "));
 
 ---------------------------------------
 
+<a name="random" />
+### random ()
+
+Returns a floating point number n, such that `0.0 <= n < 1.0`.
+
+Exactly as `uniform()`, but provided for familiarity.
+
+---------------------------------------
+
 <a name="uniform" />
 ### uniform (min, max)
 ### uniform (max)
@@ -361,8 +371,8 @@ Random integers are calculated as a modulo of a large random unsigned
 integer.  This means lower numbers will be slightly more favoured than
 large numbers, and imbalances will begin to be noticeable if you're
 asking for large integers.  If this is a problem, you are advised to
-do your own calculations on [randy.randInt()](#randInt), which returns
-a well-distributed UINT32.
+do your own calculations on [randInt()](#randInt), which returns a
+well-distributed UINT32.
 
 Maximum integer range is 2^53 = 9007199254740992.  This is the maximum
 integer available in JavaScript without losing precision.  Any calls

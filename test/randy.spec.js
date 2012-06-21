@@ -123,6 +123,14 @@ describe("randy", function () {
         done();
     });
 
+    it("random() to [0.0, 1.0)", function (done) {
+        rep(function () {
+            assert.ok(randy.random() >= 0.0);
+            assert.ok(randy.random() <= 1.0);
+        });
+        done();
+    });
+
     it("uniform(8.6, 9.7) to [8.6, 9.7)", function (done) {
         rep(function () {
             assert.ok(randy.uniform(8.6, 9.7) >= 8.6);
