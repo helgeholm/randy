@@ -40,6 +40,15 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
 <a name="browser" />
 ### In the Browser
 
+Download and include as a `<script>`.  The module will be available as
+the global object `randy`.
+
+__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 9.4kb Uncompressed
+
+__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.5kb Minified
+
+__Example__
+
 ```html
 <img id="computerHandImg">
 <script src="randy.min.js"></script>
@@ -52,10 +61,6 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
     ]);
 </script>
 ```
-
-__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 9.4kb Uncompressed
-
-__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.5kb Minified
 
 ## Documentation
 
@@ -317,7 +322,7 @@ for (i=0; i<1000; i++) {
 <a name="getRandBits" />
 ### getRandBits (n)
 
-Returns a random integer of bit width n, where n <= 53.
+Returns a random integer of bit width n, where `n <= 53`.
 
 __Arguments__
 
