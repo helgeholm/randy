@@ -41,6 +41,7 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
 ### In the Browser
 
 ```html
+<img id="computerHandImg">
 <script src="randy.min.js"></script>
 <script>
     var h = document.getElementById("computerHandImg");
