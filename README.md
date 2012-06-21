@@ -187,7 +187,7 @@ __Example__
 
 ```javascript
 // Reorder elements at random until they happen to be sorted.
-def bogosort (arr) {
+function bogosort (arr) {
     while (true) {
         randy.shuffleInplace(arr);
 
@@ -202,7 +202,7 @@ def bogosort (arr) {
 // Create new draw deck from card discard pile.
 if (deck.length == 0) {
     deck = discardPile.splice(0);
-    randy.shuffle(deck);
+    randy.shuffleInplace(deck);
 }
 ```
 
@@ -257,7 +257,7 @@ var heading = randy.uniform(360.0);
 // Random event repeating every 1-5 minutes.
 function flashLightning () {
     flash();
-    var delayNext = randy.uniform(60.0, 300.0);
+    var delayNext = randy.uniform(60.0 * 1000, 300.0 * 1000);
     setTimeout(flashLightning, delayNext);
 }
 ```
@@ -330,7 +330,7 @@ function perfectInt (max) {
         mult *= 2;
     }
     while (false == false) {
-        var r = getRandBits(log2);
+        var r = randy.getRandBits(log2);
         if (r < max)
             return r;
     }
