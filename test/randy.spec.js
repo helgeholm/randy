@@ -19,6 +19,22 @@ describe("randy", function () {
         done();
     });
 
+    it("'good' has equivalent functions to base", function (done) {
+        for (var f in randy)
+            if (randy.hasOwnProperty(f))
+                if (f != 'good' && f != 'best')
+                    assert.equal('function', typeof (randy.good[f]));
+        done();
+    });
+
+    it("'best' has equivalent functions to base", function (done) {
+        for (var f in randy)
+            if (randy.hasOwnProperty(f))
+                if (f != 'good' && f != 'best')
+                    assert.equal('function', typeof (randy.best[f]));
+        done();
+    });
+
     it("randInt() default to full 32-bit range", function (done) {
         rep(function () {
             assert.ok(randy.randInt() > 0);
@@ -31,6 +47,22 @@ describe("randy", function () {
         rep(function () {
             assert.ok(randy.randInt(10) < 10);
             assert.ok(randy.randInt(10) >= 0);
+        });
+        done();
+    });
+
+    it("good.randInt(stop) default start and step", function (done) {
+        rep(function () {
+            assert.ok(randy.good.randInt(10) < 10);
+            assert.ok(randy.good.randInt(10) >= 0);
+        });
+        done();
+    });
+
+    it("best.randInt(stop) default start and step", function (done) {
+        rep(function () {
+            assert.ok(randy.best.randInt(10) < 10);
+            assert.ok(randy.best.randInt(10) >= 0);
         });
         done();
     });
