@@ -125,6 +125,24 @@ describe("randy distributions", function () {
         done();
     });
 
+    it("best.randInt has uniform distribution", function (done) {
+        // Will fail massively if using modulo based capping
+        this.timeout(10000);
+        var h = mkHistogram([
+            0x00000000000000,
+            0x04000000000000,
+            0x08000000000000,
+            0x0c000000000000,
+            0x10000000000000
+        ]);
+        rep(function () {
+            h.insert(randy.best.randInt(0, 0x14000000000000));
+        });
+        var dist = function (x) { return 0.2; };
+        h.check(dist);
+        done();
+    });
+
     it("randInt has even distribution for 34-bit values", function (done) {
         this.timeout(10000);
         var h = mkHistogram([
