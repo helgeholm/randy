@@ -86,7 +86,8 @@ versions, under the `good` namespace.  If you're working with values
 over 65536 or so, imbalances of 0.01% will start to creep in, and a
 higher precision will reduce this problem.
 
-These functions are about twice as slow as the regular ones.
+These functions take about 35% longer to run than the ones available
+directly under `randy`.
 
 __Example__
 
@@ -94,6 +95,28 @@ __Example__
 // Generate example salary between 1,000,000 and 5,000,000
 // with values clustering around 2,000,000.
 var salary = randy.good.triangular(1000000, 5000000, 2000000);
+```
+
+### Maximally Uniform Functions
+
+The above functions are also available in maximally uniform versions,
+under the `best` namespace.
+
+Random integer calculations in the `randy` and `randy.good` functions
+are done via a modulo of a large random unsigned integer.  This will
+slightly favour lower numbers, but it is fast, and good enough for
+most use cases.  However, if you wish to avoid this imbalance, you can
+use these functions.
+
+These functions take on average 110% longer to run than the ones
+available directly under `randy`.
+
+__Example__
+
+```javascript
+var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                13, 14, 15, 16, 17, 18, 19, 20, 21, 22 ];
+var lottery = randy.best.sample(numbers, 7);
 ```
 
 ---------------------------------------
@@ -366,13 +389,6 @@ function perfectInt (max) {
 
 Due to floating point rounding, functions returning floating point
 values may *extremely rarely* tangent the upper bound.
-
-Random integers are calculated as a modulo of a large random unsigned
-integer.  This means lower numbers will be slightly more favoured than
-large numbers, and imbalances will begin to be noticeable if you're
-asking for large integers.  If this is a problem, you are advised to
-do your own calculations on [randInt()](#randInt), which returns a
-well-distributed UINT32.
 
 Maximum integer range is 2^53 = 9007199254740992.  This is the maximum
 integer available in JavaScript without losing precision.  Any calls
