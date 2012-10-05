@@ -422,8 +422,8 @@ console.log(d1 + " + " + d2 + " = " + (d1 + d2));
 
 console.log("Instant replay:");
 randy.setState(state);
-var d1 = randy.randInt(1, 7);
-var d2 = randy.randInt(1, 7);
+d1 = randy.randInt(1, 7);
+d2 = randy.randInt(1, 7);
 console.log(d1 + " + " + d2 + " = " + (d1 + d2));
 ```
 
