@@ -43,9 +43,9 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
 Download and include as a `<script>`.  The module will be available as
 the global object `randy`.
 
-__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 9.4kb Uncompressed
+__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 12.0kb Uncompressed
 
-__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 2.5kb Minified
+__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 3.1kb Minified
 
 __Example__
 
@@ -64,7 +64,7 @@ __Example__
 
 ## Documentation
 
-### Module Functions
+### Randomness Functions
 
 * [randInt](#randInt)
 * [choice](#choice)
@@ -119,9 +119,14 @@ var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
 var lottery = randy.best.sample(numbers, 7);
 ```
 
+### State Functions
+
+* [getState](#getState)
+* [setState](#setState)
+
 ---------------------------------------
 
-## Module Functions
+## Randomness Functions
 
 <a name="randInt" />
 ### randInt (min, max, step)
@@ -381,6 +386,45 @@ function perfectInt (max) {
             return r;
     }
 }
+```
+
+---------------------------------------
+
+## State Functions
+
+<a name="getState" />
+### getState ()
+
+Returns a JavaScript object representing the current state of the generator.
+
+This object can be used as a parameter to `setState()`.
+
+<a name="setState" />
+### setState (state)
+
+Sets the generator to a specific state, allowing for replay of random values.
+
+__Arguments__
+
+* state - Must be object retrieved from an earlier call to `getState()`.
+
+__Example__
+
+This will roll a pair of dice, reset the generator state, and roll the
+dice again with the exact same output.
+
+```javascript
+var state = randy.getState();
+console.log("Rolling the dice:");
+var d1 = randy.randInt(1, 7);
+var d2 = randy.randInt(1, 7);
+console.log(d1 + " + " + d2 + " = " + (d1 + d2));
+
+console.log("Instant replay:");
+randy.setState(state);
+var d1 = randy.randInt(1, 7);
+var d2 = randy.randInt(1, 7);
+console.log(d1 + " + " + d2 + " = " + (d1 + d2));
 ```
 
 ---------------------------------------
