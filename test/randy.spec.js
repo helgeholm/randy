@@ -219,22 +219,21 @@ describe("randy", function () {
     });
 
     it("can load state", function (done) {
-        randy.setState(
-            { seed: [ 0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0 ],
-              idx: 0 }
-        );
+        randy.setState(randy.getState());
         done();
     });
 
     it("respects loaded state", function (done) {
         var s = randy.getState();
-        var fasit = randy.getRandBits();
+        var fasit = [ randy.getRandBits(),
+                      randy.getRandBits(),
+                      randy.getRandBits() ];
         rep(function () {
             randy.setState(s);
-            assert.ok(randy.getRandBits() == fasit);
+            var output = [ randy.getRandBits(),
+                           randy.getRandBits(),
+                           randy.getRandBits() ];
+            assert.deepEqual(fasit, output);
         });
         done();
     });
