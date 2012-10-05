@@ -22,7 +22,8 @@ describe("randy", function () {
     it("'good' has equivalent functions to base", function (done) {
         for (var f in randy)
             if (randy.hasOwnProperty(f))
-                if (f != 'good' && f != 'best')
+                if (f != 'good' && f != 'best' &&
+                    f != 'setState' && f != 'getState')
                     assert.equal('function', typeof (randy.good[f]));
         done();
     });
@@ -30,7 +31,8 @@ describe("randy", function () {
     it("'best' has equivalent functions to base", function (done) {
         for (var f in randy)
             if (randy.hasOwnProperty(f))
-                if (f != 'good' && f != 'best')
+                if (f != 'good' && f != 'best' &&
+                    f != 'setState' && f != 'getState')
                     assert.equal('function', typeof (randy.best[f]));
         done();
     });
@@ -207,6 +209,32 @@ describe("randy", function () {
         rep(function () {
             assert.ok(randy.getRandBits(9) >= 0);
             assert.ok(randy.getRandBits(9) < 512);
+        });
+        done();
+    });
+
+    it("can save state", function (done) {
+        assert.ok(randy.getState());
+        done();
+    });
+
+    it("can load state", function (done) {
+        randy.setState(
+            { seed: [ 0, 0, 0, 0, 0, 0, 0, 0,
+                      0, 0, 0, 0, 0, 0, 0, 0,
+                      0, 0, 0, 0, 0, 0, 0, 0,
+                      0, 0, 0, 0, 0, 0, 0, 0 ],
+              idx: 0 }
+        );
+        done();
+    });
+
+    it("respects loaded state", function (done) {
+        var s = randy.getState();
+        var fasit = randy.getRandBits();
+        rep(function () {
+            randy.setState(s);
+            assert.ok(randy.getRandBits() == fasit);
         });
         done();
     });
