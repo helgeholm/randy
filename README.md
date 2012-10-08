@@ -123,6 +123,7 @@ var lottery = randy.best.sample(numbers, 7);
 
 * [getState](#getState)
 * [setState](#setState)
+* [instance](#instance)
 
 ---------------------------------------
 
@@ -425,6 +426,41 @@ randy.setState(state);
 d1 = randy.randInt(1, 7);
 d2 = randy.randInt(1, 7);
 console.log(d1 + " + " + d2 + " = " + (d1 + d2));
+```
+
+<a name="instance" />
+### instance ()
+### instance (state)
+
+Creates a separate `randy` instance, for those use cases where a
+global object is a bad fit.  The instance has the same functions as
+the global object.
+
+If no `state` parameter is given, the new instance will be initialized
+randomly.
+
+Calling this will not affect the generator state.
+
+__Arguments__
+
+* state - Must be object retrieved from an earlier call to
+          `getState()`.
+
+__Example__
+
+Create two instances, one a copy of the global object.  Sync the
+copies to the original `randy` state.
+
+```javascript
+var origState = randy.getState();
+var r1 = randy.instance(origState);
+var r2 = randy.instance();
+console.log(randy.randInt(50), r1.randInt(50), r2.randInt(50)); // 34 34 17
+console.log(randy.randInt(50), r1.randInt(50), r2.randInt(50)); // 12 12 4
+r1.setState(origState);
+r2.setState(origState);
+console.log(randy.randInt(50), r1.randInt(50), r2.randInt(50)); // 15 34 34
+console.log(randy.randInt(50), r1.randInt(50), r2.randInt(50)); // 36 12 12
 ```
 
 ---------------------------------------

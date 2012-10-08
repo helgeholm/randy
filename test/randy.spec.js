@@ -23,7 +23,8 @@ describe("randy", function () {
         for (var f in randy)
             if (randy.hasOwnProperty(f))
                 if (f != 'good' && f != 'best' &&
-                    f != 'setState' && f != 'getState')
+                    f != 'setState' && f != 'getState' &&
+                    f != 'instance')
                     assert.equal('function', typeof (randy.good[f]));
         done();
     });
@@ -32,7 +33,8 @@ describe("randy", function () {
         for (var f in randy)
             if (randy.hasOwnProperty(f))
                 if (f != 'good' && f != 'best' &&
-                    f != 'setState' && f != 'getState')
+                    f != 'setState' && f != 'getState' &&
+                    f != 'instance')
                     assert.equal('function', typeof (randy.best[f]));
         done();
     });
@@ -235,6 +237,38 @@ describe("randy", function () {
                            randy.getRandBits() ];
             assert.deepEqual(fasit, output);
         });
+        done();
+    });
+
+    it("can spawn babbies", function (done) {
+        var i = randy.instance();
+        i.getRandBits();
+        done();
+    });
+
+    it("instances have divergent state", function (done) {
+        var r1 = randy;
+        var r2 = randy.instance();
+        var r3 = randy.instance();
+        var r1Values = [];
+        var r2Values = [];
+        var r3Values = [];
+        for (var i = 0; i < 10; i++) {
+            r1Values.push(r1.getRandBits());
+            r2Values.push(r2.getRandBits());
+            r3Values.push(r3.getRandBits());
+        }
+        assert.notDeepEqual(r1Values, r2Values);
+        assert.notDeepEqual(r1Values, r3Values);
+        assert.notDeepEqual(r2Values, r3Values);
+        done();
+    });
+
+    it("instances can be initialized with state", function (done) {
+        var r1 = randy;
+        var s1 = r1.getState();
+        var r2 = randy.instance(s1);
+        assert.equal(r1.getRandBits(), r2.getRandBits());
         done();
     });
 });
