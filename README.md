@@ -10,7 +10,7 @@ with up to 53-bit precision.  The reason for this is that the built-in
 [implementation-dependent](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 and therefore of very limited usefulness, as you risk running into
 crappy implementations.  Even the V8 engine (used by Node.js) only
-provide 32-bit entropy, and is based on the platform-dependent C++
+provides 32-bit entropy, and is based on the platform-dependent C++
 `rand()` function.
 
 ## Quick Examples
@@ -76,6 +76,12 @@ __Example__
 * [triangular](#triangular)
 * [getRandBits](#getRandBits)
 
+### State Functions
+
+* [getState](#getState)
+* [setState](#setState)
+* [instance](#instance)
+
 ### High-Precision Functions
 
 All the above module functions use 32-bit precision if possible, but
@@ -119,12 +125,6 @@ var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
 var lottery = randy.best.sample(numbers, 7);
 ```
 
-### State Functions
-
-* [getState](#getState)
-* [setState](#setState)
-* [instance](#instance)
-
 ---------------------------------------
 
 ## Randomness Functions
@@ -147,8 +147,7 @@ __Arguments__
 
 * min - default=0. Returned integer will be min or greater.
 * max - default=2^32. Returned integer will be less than max.
-* step - default=1. Returned integer will be a multiple of this,
-         counting from min.
+* step - default=1. Returned integer will be a multiple of this, counting from min.
 
 __Example__
 
@@ -172,8 +171,7 @@ Throws an exception if arr is empty.
 
 __Arguments__
 
-* arr - Array of elements of any type.  Length > 0.
-        Return value will be an element of arr.
+* arr - Array of elements of any type.  Length > 0.  Return value will be an element of arr.
 
 __Example__
 
@@ -295,8 +293,7 @@ Returns a floating point number n, such that `min <= n < max`.
 
 __Arguments__
 
-* min - Default=0.0.  Returned value will be equal to or larger than
-        this.
+* min - Default=0.0.  Returned value will be equal to or larger than this.
 * max - Default=1.0.  Returned value will be less than this.
 
 __Example__
@@ -334,11 +331,9 @@ an "inspired guess" as to the modal value.
 
 __Arguments__
 
-* min - Default=0.0.  Returned value will be equal to or larger than
-        this.
+* min - Default=0.0.  Returned value will be equal to or larger than this.
 * max - Default=1.0.  Returned value will be less than this.
-* mode - Default is average of min and max.  Returned values are likely
-         to be close to this value.
+* mode - Default is average of min and max.  Returned values are likely to be close to this value.
 
 __Example__
 
@@ -443,8 +438,7 @@ Calling this will not affect the generator state.
 
 __Arguments__
 
-* state - Must be object retrieved from an earlier call to
-          `getState()`.
+* state - Must be object retrieved from an earlier call to `getState()`.
 
 __Example__
 
