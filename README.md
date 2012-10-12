@@ -106,8 +106,8 @@ var salary = randy.good.triangular(1000000, 5000000, 2000000);
 
 ### Maximally Uniform Functions
 
-The above functions are also available in maximally uniform versions,
-under the `best` namespace.
+The randomness functions are also available in maximally uniform
+versions, under the `best` namespace.
 
 Random integer calculations in the `randy` and `randy.good` functions
 are done via a modulo of a large random unsigned integer.  This will
@@ -463,7 +463,7 @@ console.log(randy.randInt(50), r1.randInt(50), r2.randInt(50)); // 36 12 12
 ## Notes
 
 No functions rely on `this`, so it's safe to e.g. assign
-`randy.good.randInt(100)` to a variable or pass it around as a
+`randy.good.randInt` to a variable or pass it around as a
 parameter.
 
 Due to floating point rounding, functions returning floating point
