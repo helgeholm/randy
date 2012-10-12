@@ -84,10 +84,11 @@ __Example__
 
 ### High-Precision Functions
 
-All the above module functions use 32-bit precision if possible, but
-will use 53-bit precision if they need to go outside the 32-bit range.
+All the above randomness functions use 32-bit precision if possible,
+but will use 53-bit precision if they need to go outside the 32-bit
+range.
 
-The above functions are also available in always-53-bit-precision
+The randomness functions are also available in always-53-bit-precision
 versions, under the `good` namespace.  If you're working with values
 over 65536 or so, imbalances of 0.01% will start to creep in, and a
 higher precision will reduce this problem.
@@ -460,6 +461,10 @@ console.log(randy.randInt(50), r1.randInt(50), r2.randInt(50)); // 36 12 12
 ---------------------------------------
 
 ## Notes
+
+No functions rely on `this`, so it's safe to e.g. assign
+`randy.good.randInt(100)` to a variable or pass it around as a
+parameter.
 
 Due to floating point rounding, functions returning floating point
 values may *extremely rarely* tangent the upper bound.
