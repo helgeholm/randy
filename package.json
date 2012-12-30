@@ -22,9 +22,9 @@
     },
     "scripts": {
         "test": "node_modules/mocha/bin/mocha",
+        "prepublish": "node ./qc.js",
         "minify": "node_modules/uglify-js/bin/uglifyjs --unsafe -o lib/randy.min.js lib/randy.js",
         "test-distribution": "node_modules/mocha/bin/mocha -R landing -t 300000 -s 300000 test-distribution/",
-        "qc": "node ./qc.js",
         "prepare-webclient-tests": "git submodule update --init --recursive"
     }
 }
