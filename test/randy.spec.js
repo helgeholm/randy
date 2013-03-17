@@ -271,4 +271,41 @@ describe("randy", function () {
         assert.equal(r1.getRandBits(), r2.getRandBits());
         done();
     });
+
+    it("process.uptime missing", function (done) {
+        if (typeof module === "undefined") {
+            // browser mode, test only relevant for NodeJs mode - skip test
+            return done();
+        }
+        var uptime = process.uptime;
+        var good = false;
+        delete process.uptime;
+        try {
+            randy.instance();
+            good = true;
+        } finally {
+            process.uptime = uptime;
+        }
+        assert.ok(good);
+        done();
+    });
+
+    it("os.uptime missing", function (done) {
+        if (typeof module === "undefined") {
+            // browser mode, test only relevant for NodeJs mode - skip test
+            return done();
+        }
+        var os = require("os");
+        var uptime = os.uptime;
+        var good = false;
+        delete os.uptime;
+        try {
+            randy.instance();
+            good = true;
+        } finally {
+            os.uptime = uptime;
+        }
+        assert.ok(good);
+        done();
+    });
 });
