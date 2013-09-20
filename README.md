@@ -1,5 +1,7 @@
 # Randy.js
 
+[![NPM](https://nodei.co/npm/randy.png)](https://nodei.co/npm/randy/)
+
 Randy is a utility module inspired by Python's very handy standard
 module "random".  It contains a PRNG and useful randomness functions.
 
