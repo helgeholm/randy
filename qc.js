@@ -4,14 +4,7 @@
 
 var spawn = require("child_process").spawn;
 
-function runScript(script, setEnv, done) {
-    if (typeof setEnv === 'function') {
-        done = setEnv;
-        setEnv = {};
-    }
-    for (var k in setEnv)
-        if (setEnv.hasOwnProperty(k))
-            process.env[k] = setEnv[k];
+function runScript(script, done) {
     var proc = spawn(
         'npm',
         ["run-script", script],
@@ -24,22 +17,21 @@ function runScript(script, setEnv, done) {
 }
 
 var ops = [
-    ['minify'],
-    ['test', {TEST_MINIFIED_VERSION: 'no'}],
-    ['test', {TEST_MINIFIED_VERSION: 'yes'}],
-    ['test-distribution', {TEST_MINIFIED_VERSION: 'no'}],
-    ['test-distribution', {TEST_MINIFIED_VERSION: 'yes'}]
+    'browserify',
+    'minify',
+    'test',
+    'test-distribution'
 ];
 
 function runAllOps (lastError) {
-    if (lastError !== null)
+    if (lastError != null)
         return;
-    if (ops.length === 0) {
+    if (!ops.length) {
         console.log("☺");
         return;
     }
-    var op = ops.shift().concat(runAllOps);
-    runScript.apply(this, op);
+    var op = ops.shift();
+    runScript(op, runAllOps);
 }
 
 runAllOps(null);
