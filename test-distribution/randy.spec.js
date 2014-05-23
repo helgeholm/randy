@@ -1,3 +1,5 @@
+/* -*- js-indent-level: 4; -*- */
+
 /* These tests check that the RNG distribution falls within the
  * expected range.
  *
