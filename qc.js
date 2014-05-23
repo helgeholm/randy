@@ -17,8 +17,7 @@ function runScript(script, done) {
 }
 
 var ops = [
-    'browserify',
-    'minify',
+    'browser',
     'test',
     'test-distribution'
 ];

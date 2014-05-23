@@ -2,7 +2,7 @@
 
 if (typeof randy == "undefined") {
     // Predefined in browser mode, so assume nodejs context.
-    var randy = require(__dirname + "/../lib/randy");
+    var randy = require("../lib/randy");
     var assert = require("assert");
 }
 
