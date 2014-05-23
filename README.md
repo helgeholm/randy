@@ -45,9 +45,9 @@ For [Node.js](http://nodejs.org/), use [npm](http://npmjs.org/):
 Download and include as a `<script>`.  The module will be available as
 the global object `randy`.
 
-__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/lib/randy.js) - 12Kb Uncompressed
+__Development:__ [randy.js](https://github.com/deestan/randy/raw/master/browser/randy.js) - 12Kb Uncompressed
 
-__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/lib/randy.min.js) - 3.4Kb Minified
+__Production:__ [randy.min.js](https://github.com/deestan/randy/raw/master/browser/randy.min.js) - 3.5Kb Minified
 
 __Example__
 
