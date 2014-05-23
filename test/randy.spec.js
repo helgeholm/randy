@@ -1,3 +1,5 @@
+/* -*- js-indent-level: 4; -*- */
+
 if (typeof randy == "undefined") {
     // Predefined in browser mode, so assume nodejs context.
     if (process.env.TEST_MINIFIED_VERSION == 'yes') {
