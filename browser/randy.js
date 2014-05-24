@@ -1,4 +1,5 @@
-function well1024a (entropy) {
+function well1024a (entropy_) {
+    var entropy = entropy_ || [];
     var m1 = 3, m2 = 24, m3 = 10;
     var state = [ 0, 0, 0, 0, 0, 0, 0, 0,
                   0, 0, 0, 0, 0, 0, 0, 0,

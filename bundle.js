@@ -8,7 +8,7 @@ function cut(src) {
 }
 
 var randySrc = cut(fs.readFileSync(__dirname + '/lib/randy.js'));
-var well1024aSrc = cut(fs.readFileSync(__dirname + '/lib/well1024a.js'));
+var well1024aSrc = fs.readFileSync(__dirname + '/node_modules/prng-well1024a/browser/well1024a.js');
 
 fs.writeFileSync(__dirname + '/browser/randy.js',
                  well1024aSrc + '\n' + randySrc);
