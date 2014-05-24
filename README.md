@@ -1,4 +1,4 @@
-# Randy.js
+# randy.js
 
 [![NPM](https://nodei.co/npm/randy.png)](https://nodei.co/npm/randy/)
 
