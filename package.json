@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha",
-    "prepublish": "node ./qc.js",
+    "prepublish": "npm test && npm run-script browser && npm run-script test-distribution && echo Prepublish Checks OK",
     "browser": "node ./bundle.js && node_modules/uglify-js/bin/uglifyjs --unsafe -o browser/randy.min.js browser/randy.js",
     "test-distribution": "node_modules/mocha/bin/mocha -R landing -t 300000 -s 300000 test-distribution/",
     "prepare-webclient-tests": "git submodule update --init --recursive"
