@@ -138,8 +138,9 @@ var lottery = randy.best.sample(numbers, 7);
 ### randInt (max)
 ### randInt ()
 
-Returns a random integer i such that `min <= i < max`, and `(i - min)
-% step = 0`.
+Returns a random integer `i` such that `min <= i < max`.
+
+If `step` is provided, then additionally `(i - min) % step = 0`.
 
 Return value is based on a random 32-bit integer.
 
