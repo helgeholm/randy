@@ -7,8 +7,11 @@ function cut(src) {
   return srcStr.substr(match.index + match[0].length);
 }
 
+var wellInsert = /^.*---- IF BROWSER, INSERT WELL-1024A HERE ----$/m;
+
 var randySrc = cut(fs.readFileSync(__dirname + '/lib/randy.js'));
 var well1024aSrc = fs.readFileSync(__dirname + '/node_modules/prng-well1024a/browser/well1024a.js');
 
-fs.writeFileSync(__dirname + '/browser/randy.js',
-                 well1024aSrc + '\n' + randySrc);
+var result = randySrc.replace(wellInsert, well1024aSrc);
+
+fs.writeFileSync(__dirname + '/browser/randy.js', result);

@@ -1,3 +1,4 @@
+var randy = (function () {
 function well1024a (entropy_) {
     var entropy = entropy_ || [];
     var m1 = 3, m2 = 24, m3 = 10;
@@ -56,7 +57,7 @@ function well1024a (entropy_) {
              getUInt32: getUInt32 };
 }
 
-var randy = (function () {
+
     function instantiate (initState) {
         var entropy;
         if (typeof window == "undefined") {
