@@ -62,18 +62,23 @@ describe("randy distributions", function () {
 
         // distFun(x) - how many values should bucket at x ideally
         // have, given as a scalar of the sum of all buckets.
-        function check (distFun) {
-            var sum = 0;
-            for (var i = 0; i < buckets.length; i++)
-                sum += buckets[i].n;
-            for (var i = 0; i < buckets.length; i++) {
-                var x = buckets[i].x;
-                var expected = distFun(x) * sum;
-                var tolerance = expected * 0.01;
-                var loThreshold = expected - tolerance;
-                var hiThreshold = expected + tolerance;
-                assert.ok(loThreshold < buckets[i].n);
-                assert.ok(buckets[i].n < hiThreshold);
+        function check (distFun, checking) {
+            try {
+                var sum = 0;
+                for (var i = 0; i < buckets.length; i++)
+                    sum += buckets[i].n;
+                for (var i = 0; i < buckets.length; i++) {
+                    var x = buckets[i].x;
+                    var expected = distFun(x) * sum;
+                    var tolerance = expected * 0.01;
+                    var loThreshold = expected - tolerance;
+                    var hiThreshold = expected + tolerance;
+                    assert.ok(loThreshold < buckets[i].n, checking + ': bucket ' + i + ' is below low threshold');
+                    assert.ok(buckets[i].n < hiThreshold, checking + ': bicket ' + i + ' is above high threshold');
+                }
+            } catch(e) {
+                log();
+                throw e;
             }
         }
 
@@ -222,7 +227,7 @@ describe("randy distributions", function () {
                 hs[shuffled[i]].insert(i);
         });
         for (var i = 1; i < 6; i++)
-            hs[i].check(function (x) { return 0.2; } );
+            hs[i].check(function (x) { return 0.2; }, "end position of element with value " + i);
         done();
     });
 
